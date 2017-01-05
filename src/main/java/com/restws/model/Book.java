@@ -2,6 +2,7 @@ package com.restws.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.hateoas.Identifiable;
 import org.springframework.hateoas.ResourceSupport;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.hateoas.ResourceSupport;
  * Created by Ninad on 1/4/2017.
  */
 @Document(collection = "books")
-public class Book extends ResourceSupport{ // ResourceSupport is used to add HATEOAS support for navigation
+public class Book implements Identifiable<String>{
     @org.springframework.data.annotation.Id
     private String _Id;
 
@@ -21,11 +22,11 @@ public class Book extends ResourceSupport{ // ResourceSupport is used to add HAT
 
     private boolean read = false;
 
-    public String get_Id() {
+    public String getId() {
         return _Id;
     }
 
-    public void set_Id(String id) {
+    public void setId(String id) {
         _Id = id;
     }
 

@@ -4,6 +4,7 @@ import com.restws.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,12 @@ public class BooksService {
     public Book saveBook(Book book) {
         this.mongoOperations.save(book);
         return book;
+    }
+
+    public Book getBook(String id) {
+        Query q = new Query();
+        q.addCriteria(Criteria.where("_id").is(id));
+        Book found = this.mongoOperations.findOne(q, Book.class);
+        return found;
     }
 }

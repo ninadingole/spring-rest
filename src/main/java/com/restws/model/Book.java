@@ -61,4 +61,15 @@ public class Book implements Identifiable<String>{
     public void setRead(boolean read) {
         this.read = read;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "_Id='" + _Id + '\'' +
+                ", title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", author='" + author + '\'' +
+                ", read=" + read +
+                '}';
+    }
 }

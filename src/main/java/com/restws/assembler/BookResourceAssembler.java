@@ -25,6 +25,11 @@ public class BookResourceAssembler extends IdentifiableResourceAssemblerSupport<
         super(BooksRestController.class, BookResource.class);
     }
 
+    /**
+     * Used in case of multiple entities.
+     * @param entities
+     * @return
+     */
     @Override
     public List<BookResource> toResources(Iterable<? extends Book> entities) {
         List<BookResource> res = new ArrayList<>();
@@ -33,17 +38,24 @@ public class BookResourceAssembler extends IdentifiableResourceAssemblerSupport<
             BookResource bookResource = createResourceWithId(book.getId(), book);
             bookResource.setGenre(book.getGenre());
             bookResource.setTitle(book.getTitle());
+            bookResource.setAuthor(book.getAuthor());
             // You can also add other mappings here.
             res.add(bookResource);
         });
         return res;
     }
 
+    /**
+     * Used in case of one entity.
+     * @param book
+     * @return
+     */
     @Override
     public BookResource toResource(Book book) {
         BookResource resource = createResource(book);
         resource.setTitle(book.getTitle());
         resource.setGenre(book.getGenre());
+        resource.setAuthor(book.getAuthor());
         Map<String,String> map  = new HashMap<>();
         map.put("genre",resource.getGenre());
         resource.add(linkTo(methodOn(BooksRestController.class).get(resource.getGenre())).withRel("filterByThisGenre"));

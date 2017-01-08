@@ -9,6 +9,15 @@ import org.springframework.hateoas.ResourceSupport;
 public class BookResource extends ResourceSupport { // ResourceSupport is used to add HATEOAS support for navigation
     private String title;
     private String genre;
+    private String author;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getTitle() {
         return title;
